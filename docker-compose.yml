@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - 8080:8080
+    working_dir: /app/demo
+    command: sh -c "./mvnw spring-boot:run"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    tty: true
+    ports:
+      - 3000:3000
+    stdin_open: true
+    # プロジェクトディレクトリにマウントする
+    volumes:
+      - ./frontend:/app
+    environment:
+      - WATCHPACK_POLLING=true
+    working_dir: /app/demo
+    command: sh -c "npm run dev"
