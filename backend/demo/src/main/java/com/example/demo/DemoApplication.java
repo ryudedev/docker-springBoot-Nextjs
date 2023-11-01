@@ -20,4 +20,12 @@ public class DemoApplication {
 			return "Hello from Spring Boot!";
 		}
 	}
+
+	@RestController
+	static class UserController {
+		@GetMapping("/users")
+		public String getUsers() {
+			return "high";
+		}
+	}
 }
